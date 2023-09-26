@@ -23,4 +23,14 @@ public class EnderecoDTO{
                 endereco.getNumero(), endereco.getComplemento(), endereco.getCep(),
                 endereco.getMunicipio());
     }
+
+    public EnderecoDTO(EnderecoUpdateDTO enderecoUpdateDTO) {
+        enderecoId=enderecoUpdateDTO.getEnderecoId();
+        logradouro=enderecoUpdateDTO.getLogradouro();
+        bairro=enderecoUpdateDTO.getBairro();
+        numero=enderecoUpdateDTO.getNumero();
+        complemento=enderecoUpdateDTO.getComplemento();
+        cep=enderecoUpdateDTO.getCep();
+        municipio=enderecoUpdateDTO.getMunicipio();
+    }
 }

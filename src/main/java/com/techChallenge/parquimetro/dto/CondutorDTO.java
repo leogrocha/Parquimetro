@@ -22,4 +22,5 @@ public class CondutorDTO {
     public CondutorDTO(Condutor condutor) {
         this(condutor.getCondutorId(), condutor.getNome(), condutor.getCpf(), condutor.getTelefone(), condutor.getEmail(), condutor.getFormaPagamento(), new EnderecoDTO(condutor.getEndereco()));
     }
+
 }

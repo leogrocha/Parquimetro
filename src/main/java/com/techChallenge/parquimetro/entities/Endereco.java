@@ -2,6 +2,7 @@ package com.techChallenge.parquimetro.entities;
 
 import com.techChallenge.parquimetro.dto.EnderecoDTO;
 import com.techChallenge.parquimetro.dto.EnderecoSaveDTO;
+import com.techChallenge.parquimetro.dto.EnderecoUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +35,16 @@ public class Endereco {
         complemento = enderecoDTO.getComplemento();
         cep = enderecoDTO.getCep();
         municipio= enderecoDTO.getMunicipio();
+    }
+
+    public Endereco(EnderecoUpdateDTO enderecoUpdateDTO) {
+        enderecoId = enderecoUpdateDTO.getEnderecoId();
+        logradouro = enderecoUpdateDTO.getLogradouro() != null ? enderecoUpdateDTO.getLogradouro() : getLogradouro();
+        bairro = enderecoUpdateDTO.getBairro() != null ? enderecoUpdateDTO.getBairro() : getBairro();
+        numero = enderecoUpdateDTO.getNumero() != null ? enderecoUpdateDTO.getNumero() : getNumero();
+        complemento = enderecoUpdateDTO.getComplemento() != null ? enderecoUpdateDTO.getComplemento() : getComplemento();
+        cep = enderecoUpdateDTO.getCep() != null ? enderecoUpdateDTO.getCep() : getCep();
+        municipio= enderecoUpdateDTO.getMunicipio() != null ? enderecoUpdateDTO.getMunicipio() : getMunicipio();
     }
 
 

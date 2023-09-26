@@ -1,9 +1,12 @@
 package com.techChallenge.parquimetro.entities;
 
-import com.techChallenge.parquimetro.dto.CondutorDTO;
 import com.techChallenge.parquimetro.dto.CondutorSaveDTO;
+import com.techChallenge.parquimetro.dto.CondutorUpdateDTO;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Table(name = "tb_condutor")
@@ -25,6 +28,15 @@ public class Condutor {
     @OneToOne
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_condutor_veiculo",
+            joinColumns = @JoinColumn(name = "condutor_id"),
+            inverseJoinColumns = @JoinColumn(name = "veiculo_id")
+    )
+    Set<Veiculo> veiculos = new HashSet<>();
 
     public Condutor(CondutorSaveDTO dto) {
         nome = dto.getNome();
@@ -49,5 +61,13 @@ public class Condutor {
         this.telefone = telefone;
         this.email = email;
         this.formaPagamento = formaPagamento;
+    }
+
+    public Condutor(CondutorUpdateDTO condutorUpdateDTO, Endereco endereco) {
+        nome=condutorUpdateDTO.getNome() != null ? condutorUpdateDTO.getNome() : getNome();
+        telefone=condutorUpdateDTO.getTelefone() != null ? condutorUpdateDTO.getTelefone() : getTelefone();
+        email=condutorUpdateDTO.getEmail() != null ? condutorUpdateDTO.getEmail() : getEmail();
+        formaPagamento=condutorUpdateDTO.getFormaPagamento() != null ? condutorUpdateDTO.getFormaPagamento() : getFormaPagamento();
+        this.endereco = endereco != null ? endereco : this.endereco;
     }
 }

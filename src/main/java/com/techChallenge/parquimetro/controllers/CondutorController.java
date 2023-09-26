@@ -2,6 +2,7 @@ package com.techChallenge.parquimetro.controllers;
 
 import com.techChallenge.parquimetro.dto.CondutorDTO;
 import com.techChallenge.parquimetro.dto.CondutorSaveDTO;
+import com.techChallenge.parquimetro.dto.CondutorUpdateDTO;
 import com.techChallenge.parquimetro.entities.Condutor;
 import com.techChallenge.parquimetro.services.CondutorService;
 import jakarta.validation.Valid;
@@ -36,6 +37,11 @@ public class CondutorController {
         System.out.println(condutorSaveDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
         return ResponseEntity.created(uri).body(service.save(condutorSaveDTO));
+    }
+
+    @PutMapping("/{condutorId}")
+    public ResponseEntity<CondutorDTO> update(@RequestBody @Valid CondutorUpdateDTO condutorUpdateDTO, @PathVariable Long condutorId) {
+        return ResponseEntity.ok(service.update(condutorUpdateDTO, condutorId));
     }
 
 
