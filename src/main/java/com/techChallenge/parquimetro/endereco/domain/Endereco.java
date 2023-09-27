@@ -1,18 +1,19 @@
-package com.techChallenge.parquimetro.entities;
+package com.techChallenge.parquimetro.endereco.domain;
 
-import com.techChallenge.parquimetro.dto.EnderecoDTO;
-import com.techChallenge.parquimetro.dto.EnderecoSaveDTO;
-import com.techChallenge.parquimetro.dto.EnderecoUpdateDTO;
+import com.techChallenge.parquimetro.condutor.domain.Condutor;
+import com.techChallenge.parquimetro.endereco.dto.EnderecoSaveDTO;
+import com.techChallenge.parquimetro.endereco.dto.EnderecoUpdateDTO;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "tb_endereco")
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"enderecoId"})
+@ToString
+@Getter
+@Setter
 public class Endereco {
 
     @Id

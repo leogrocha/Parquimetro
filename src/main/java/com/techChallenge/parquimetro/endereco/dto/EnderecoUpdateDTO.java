@@ -1,15 +1,18 @@
-package com.techChallenge.parquimetro.dto;
+package com.techChallenge.parquimetro.endereco.dto;
 
-import com.techChallenge.parquimetro.entities.Endereco;
+import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class EnderecoSaveDTO {
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"enderecoId"})
+@ToString
+@Getter
+@Setter
+public class EnderecoUpdateDTO {
+
+    Long enderecoId;
 
     @NotBlank(message = "Logradouro não pode ser nulo ou em branco")
     private String logradouro;
@@ -23,14 +26,10 @@ public class EnderecoSaveDTO {
     @NotBlank(message = "Município não pode ser nulo ou em branco")
     private String municipio;
 
-    public EnderecoSaveDTO(Endereco endereco) {
-        logradouro=endereco.getLogradouro();
-        bairro=endereco.getBairro();
-        numero=endereco.getNumero();
-        complemento=endereco.getComplemento();
-        cep=endereco.getCep();
-        municipio=endereco.getMunicipio();
+    public EnderecoUpdateDTO(Endereco endereco) {
+        this(endereco.getEnderecoId(),
+                endereco.getLogradouro(), endereco.getBairro(),
+                endereco.getNumero(), endereco.getComplemento(),
+                endereco.getCep(), endereco.getMunicipio());
     }
-
-
 }

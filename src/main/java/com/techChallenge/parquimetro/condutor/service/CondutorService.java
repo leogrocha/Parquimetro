@@ -1,19 +1,18 @@
-package com.techChallenge.parquimetro.services;
+package com.techChallenge.parquimetro.condutor.service;
 
-import com.techChallenge.parquimetro.config.ControllerNotFoundException;
-import com.techChallenge.parquimetro.dto.CondutorDTO;
-import com.techChallenge.parquimetro.dto.CondutorSaveDTO;
-import com.techChallenge.parquimetro.dto.CondutorUpdateDTO;
-import com.techChallenge.parquimetro.entities.Condutor;
-import com.techChallenge.parquimetro.entities.Endereco;
-import com.techChallenge.parquimetro.repositories.CondutorRepository;
-import com.techChallenge.parquimetro.repositories.EnderecoRepository;
+import com.techChallenge.parquimetro.config.exceptions.ControllerNotFoundException;
+import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
+import com.techChallenge.parquimetro.condutor.domain.Condutor;
+import com.techChallenge.parquimetro.endereco.domain.Endereco;
+import com.techChallenge.parquimetro.condutor.repository.CondutorRepository;
+import com.techChallenge.parquimetro.endereco.repository.EnderecoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -31,8 +30,8 @@ public class CondutorService {
     }
 
     @Transactional(readOnly = true)
-    public CondutorDTO findById(Long condutor_id) {
-        return repository.findById(condutor_id).stream()
+    public CondutorDTO findById(Long condutorId) {
+        return repository.findById(condutorId).stream()
                 .map(CondutorDTO::new)
                 .findFirst().orElseThrow(() -> new ControllerNotFoundException("Condutor não encontrado."));
     }

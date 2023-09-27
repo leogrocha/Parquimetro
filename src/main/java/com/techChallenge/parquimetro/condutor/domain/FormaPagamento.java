@@ -1,4 +1,4 @@
-package com.techChallenge.parquimetro.entities;
+package com.techChallenge.parquimetro.condutor.domain;
 
 public enum FormaPagamento {
 

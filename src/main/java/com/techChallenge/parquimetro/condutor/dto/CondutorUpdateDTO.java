@@ -1,18 +1,20 @@
-package com.techChallenge.parquimetro.dto;
+package com.techChallenge.parquimetro.condutor.dto;
 
-import com.techChallenge.parquimetro.entities.Condutor;
-import com.techChallenge.parquimetro.entities.Endereco;
-import com.techChallenge.parquimetro.entities.FormaPagamento;
+import com.techChallenge.parquimetro.endereco.dto.EnderecoUpdateDTO;
+import com.techChallenge.parquimetro.condutor.domain.Condutor;
+import com.techChallenge.parquimetro.endereco.domain.Endereco;
+import com.techChallenge.parquimetro.condutor.domain.FormaPagamento;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"condutorId"})
+@ToString
+@Getter
+@Setter
 public class CondutorUpdateDTO {
 
     Long condutorId;

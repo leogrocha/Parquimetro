@@ -1,7 +1,9 @@
-package com.techChallenge.parquimetro.entities;
+package com.techChallenge.parquimetro.condutor.domain;
 
-import com.techChallenge.parquimetro.dto.CondutorSaveDTO;
-import com.techChallenge.parquimetro.dto.CondutorUpdateDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
+import com.techChallenge.parquimetro.endereco.domain.Endereco;
+import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,11 +11,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Table(name = "tb_condutor")
 @Entity
-@Data
-@AllArgsConstructor
+@Table(name = "tb_condutor")
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"condutorId"})
+@ToString
+@Getter
+@Setter
 public class Condutor {
 
     @Id
@@ -29,14 +34,13 @@ public class Condutor {
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-
     @ManyToMany
     @JoinTable(
             name = "tb_condutor_veiculo",
             joinColumns = @JoinColumn(name = "condutor_id"),
             inverseJoinColumns = @JoinColumn(name = "veiculo_id")
     )
-    Set<Veiculo> veiculos = new HashSet<>();
+    private Set<Veiculo> veiculos = new HashSet<>();
 
     public Condutor(CondutorSaveDTO dto) {
         nome = dto.getNome();

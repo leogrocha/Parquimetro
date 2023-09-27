@@ -1,21 +1,19 @@
-package com.techChallenge.parquimetro.controllers;
+package com.techChallenge.parquimetro.condutor.controller;
 
-import com.techChallenge.parquimetro.dto.CondutorDTO;
-import com.techChallenge.parquimetro.dto.CondutorSaveDTO;
-import com.techChallenge.parquimetro.dto.CondutorUpdateDTO;
-import com.techChallenge.parquimetro.entities.Condutor;
-import com.techChallenge.parquimetro.services.CondutorService;
+import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
+import com.techChallenge.parquimetro.condutor.service.CondutorService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("condutores")
 @AllArgsConstructor
 public class CondutorController {

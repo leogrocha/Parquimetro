@@ -1,6 +1,6 @@
-package com.techChallenge.parquimetro.repositories;
+package com.techChallenge.parquimetro.veiculo.repository;
 
-import com.techChallenge.parquimetro.entities.Veiculo;
+import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

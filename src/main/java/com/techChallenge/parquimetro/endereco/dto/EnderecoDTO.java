@@ -1,13 +1,14 @@
-package com.techChallenge.parquimetro.dto;
+package com.techChallenge.parquimetro.endereco.dto;
 
-import com.techChallenge.parquimetro.entities.Endereco;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.techChallenge.parquimetro.endereco.domain.Endereco;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"enderecoId"})
+@ToString
+@Getter
+@Setter
 public class EnderecoDTO{
 
     private Long enderecoId;

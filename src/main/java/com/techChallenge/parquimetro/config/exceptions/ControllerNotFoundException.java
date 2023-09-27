@@ -1,4 +1,4 @@
-package com.techChallenge.parquimetro.config;
+package com.techChallenge.parquimetro.config.exceptions;
 
 public class ControllerNotFoundException extends RuntimeException{
 
