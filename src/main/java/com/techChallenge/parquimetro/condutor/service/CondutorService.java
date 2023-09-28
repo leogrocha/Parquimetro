@@ -8,6 +8,7 @@ import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import com.techChallenge.parquimetro.condutor.repository.CondutorRepository;
 import com.techChallenge.parquimetro.endereco.repository.EnderecoRepository;
+import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,25 @@ public class CondutorService {
             endereco.setEnderecoId(condutor.getEndereco().getEnderecoId());
             CondutorUpdateDTO.mapperEntity(condutorUpdateDTO, condutor, endereco);
             endereco = enderecoRepository.save(endereco);
+            condutor = repository.save(condutor);
+            return new CondutorDTO(condutor);
+        } catch (EntityNotFoundException exception) {
+            throw new ControllerNotFoundException("Condutor não encontrado, id: " + condutorId);
+        }
+
+    }
+
+    @Transactional
+    public CondutorDTO updateCondutorVeiculo(CondutorUpdateDTO condutorUpdateDTO, Veiculo veiculo, Long condutorId) {
+
+        try {
+
+            var condutor = repository.getReferenceById(condutorId);
+            var endereco = new Endereco(condutorUpdateDTO.getEndereco());
+            endereco.setEnderecoId(condutor.getEndereco().getEnderecoId());
+            CondutorUpdateDTO.mapperEntity(condutorUpdateDTO, condutor, endereco);
+            endereco = enderecoRepository.save(endereco);
+            condutor.getVeiculos().add(veiculo);
             condutor = repository.save(condutor);
             return new CondutorDTO(condutor);
         } catch (EntityNotFoundException exception) {
