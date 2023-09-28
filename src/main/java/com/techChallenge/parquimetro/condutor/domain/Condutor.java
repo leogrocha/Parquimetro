@@ -28,6 +28,7 @@ public class Condutor {
     private String cpf;
     private String telefone;
     private String email;
+    @Enumerated(EnumType.STRING)
     private FormaPagamento formaPagamento;
 
     @OneToOne

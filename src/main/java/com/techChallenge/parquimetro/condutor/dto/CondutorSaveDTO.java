@@ -18,7 +18,7 @@ public class CondutorSaveDTO {
 
     @NotBlank(message = "Nome não pode ser nulo ou em branco")
     private String nome;
-    @CPF(message = "Formato do CPF inválido")
+    @CPF(message = "CPF inválido")
     @NotBlank(message = "CPF não pode ser nulo ou em branco")
     private String cpf;
     @NotBlank(message = "Telefone não pode ser nulo ou em branco")
@@ -26,6 +26,7 @@ public class CondutorSaveDTO {
     @Email(message = "Formato do e-mail inválido")
     @NotBlank(message = "E-mail não pode ser nulo ou em branco")
     private String email;
+    @NotNull(message = "Forma de pagamento não pode ser nula.")
     private FormaPagamento formaPagamento;
     @NotNull(message = "Endereço não pode ser nulo")
     private EnderecoSaveDTO endereco;

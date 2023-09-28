@@ -23,7 +23,6 @@ public class CondutorService {
     private CondutorRepository repository;
     private EnderecoRepository enderecoRepository;
 
-
     @Transactional(readOnly = true)
     public List<CondutorDTO> findAll() {
         return repository.findAll().stream().map(CondutorDTO::new).toList();
