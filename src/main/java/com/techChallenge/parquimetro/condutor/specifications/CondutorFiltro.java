@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CondutorFiltro {
 
-    public Specification<Condutor> apply(CondutorFiltroDTO condutorFiltroDTO) {
+    public Specification<Condutor> aplicarFiltro(CondutorFiltroDTO condutorFiltroDTO) {
         return Specification
                 .where(CondutorSpecifications.byNome(condutorFiltroDTO.getNome()))
                 .and(CondutorSpecifications.byCpf(condutorFiltroDTO.getCpf()));

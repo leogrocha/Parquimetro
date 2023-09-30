@@ -1,6 +1,7 @@
 package com.techChallenge.parquimetro.condutor.controller;
 
 import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
+import com.techChallenge.parquimetro.condutor.dto.CondutorFiltroDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
 import com.techChallenge.parquimetro.condutor.service.CondutorService;
@@ -21,8 +22,8 @@ public class CondutorController {
     private final CondutorService service;
 
     @GetMapping
-    public ResponseEntity<List<CondutorDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<CondutorDTO>> findAll(CondutorFiltroDTO condutorFiltroDTO) {
+        return ResponseEntity.ok(service.findAll(condutorFiltroDTO));
     }
 
     @GetMapping("/{condutor_id}")

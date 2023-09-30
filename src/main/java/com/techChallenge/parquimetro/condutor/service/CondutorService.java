@@ -28,8 +28,9 @@ public class CondutorService {
     private final CondutorFiltro condutorFiltro;
 
     @Transactional(readOnly = true)
-    public List<CondutorDTO> findAll() {
-        return repository.findAll().stream().map(CondutorDTO::new).toList();
+    public List<CondutorDTO> findAll(CondutorFiltroDTO condutorFiltroDTO) {
+        return repository.findAll(condutorFiltro.aplicarFiltro(condutorFiltroDTO))
+                .stream().map(this::convertToResponse).toList();
     }
 
     @Transactional(readOnly = true)
@@ -81,6 +82,11 @@ public class CondutorService {
         }
 
     }
+
+    public CondutorDTO convertToResponse(Condutor condutor) {
+        return CondutorDTO.of(condutor);
+    }
+
 
 
 }

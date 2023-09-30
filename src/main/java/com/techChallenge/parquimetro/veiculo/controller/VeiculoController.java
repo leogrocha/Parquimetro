@@ -1,7 +1,7 @@
 package com.techChallenge.parquimetro.veiculo.controller;
 
 
-import com.techChallenge.parquimetro.endereco.dto.VeiculoDTO;
+import com.techChallenge.parquimetro.veiculo.dto.VeiculoDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoFiltroDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoSaveDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoUpdateDTO;

@@ -1,4 +1,4 @@
-package com.techChallenge.parquimetro.endereco.dto;
+package com.techChallenge.parquimetro.veiculo.dto;
 
 import com.techChallenge.parquimetro.condutor.dto.CondutorMinDTO;
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
@@ -39,6 +39,11 @@ public class VeiculoDTO {
 
     public static VeiculoDTO of(Veiculo veiculo) {
         var veiculoDTO = new VeiculoDTO();
+        List<CondutorMinDTO> condutores = new ArrayList<>();
+        for (Condutor condutor : veiculo.getCondutores()) {
+            condutores.add(new CondutorMinDTO(condutor));
+        }
+        veiculoDTO.setCondutores(condutores);
         BeanUtils.copyProperties(veiculo, veiculoDTO);
         List<CondutorMinDTO> listaCondutores = new ArrayList<>();
         return veiculoDTO;
