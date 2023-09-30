@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CondutorController {
 
-    private CondutorService service;
+    private final CondutorService service;
 
     @GetMapping
     public ResponseEntity<List<CondutorDTO>> findAll() {

@@ -40,6 +40,7 @@ public class VeiculoDTO {
     public static VeiculoDTO of(Veiculo veiculo) {
         var veiculoDTO = new VeiculoDTO();
         BeanUtils.copyProperties(veiculo, veiculoDTO);
+        List<CondutorMinDTO> listaCondutores = new ArrayList<>();
         return veiculoDTO;
     }
 

@@ -1,5 +1,7 @@
 package com.techChallenge.parquimetro.condutor.service;
 
+import com.techChallenge.parquimetro.condutor.dto.CondutorFiltroDTO;
+import com.techChallenge.parquimetro.condutor.specifications.CondutorFiltro;
 import com.techChallenge.parquimetro.config.exceptions.ControllerNotFoundException;
 import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
@@ -21,8 +23,9 @@ import java.util.List;
 @AllArgsConstructor
 public class CondutorService {
 
-    private CondutorRepository repository;
-    private EnderecoRepository enderecoRepository;
+    private final CondutorRepository repository;
+    private final EnderecoRepository enderecoRepository;
+    private final CondutorFiltro condutorFiltro;
 
     @Transactional(readOnly = true)
     public List<CondutorDTO> findAll() {
