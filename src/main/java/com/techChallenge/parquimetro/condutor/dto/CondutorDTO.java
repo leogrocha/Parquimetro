@@ -45,6 +45,7 @@ public class CondutorDTO {
 
     public static CondutorDTO of(Condutor condutor) {
         var condutorDTO = new CondutorDTO();
+        condutorDTO.setEndereco(new EnderecoDTO((condutor.getEndereco())));
         List<VeiculoMinDTO> veiculos = new ArrayList<>();
         for (Veiculo veiculo : condutor.getVeiculos()) {
             veiculos.add(new VeiculoMinDTO(veiculo));
