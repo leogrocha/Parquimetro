@@ -49,7 +49,9 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CustomError> Error500(Exception exception, HttpServletRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        ValidationError error = new ValidationError(Instant.now(), status.value(), exception.getLocalizedMessage(), request.getRequestURI());
+        ValidationError error = new ValidationError(Instant.now(), status.value(), "ERRO GENÉRICO, ENTRAR EM CONTATO COM O SUPORTE", request.getRequestURI());
         return ResponseEntity.status(status).body(error);
     }
+
+
 }

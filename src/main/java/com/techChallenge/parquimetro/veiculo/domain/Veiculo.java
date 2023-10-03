@@ -27,6 +27,7 @@ public class Veiculo {
     private String marca;
     private String modelo;
     private Integer anoFabricacao;
+    @Column(unique = true)
     private String placa;
 
     @ManyToMany(mappedBy = "veiculos")

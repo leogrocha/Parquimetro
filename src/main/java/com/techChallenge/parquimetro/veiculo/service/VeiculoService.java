@@ -1,6 +1,7 @@
 package com.techChallenge.parquimetro.veiculo.service;
 
 import com.techChallenge.parquimetro.config.exceptions.ControllerNotFoundException;
+import com.techChallenge.parquimetro.config.exceptions.DatabaseException;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoFiltroDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoSaveDTO;
@@ -36,6 +37,13 @@ public class VeiculoService {
 
     @Transactional
     public VeiculoDTO save(VeiculoSaveDTO veiculoSaveDTO) {
+
+        // TODO - Verificar melhor maneira de padronização dessa validação
+        boolean veiculoJaFoiCadastrado = repository.existsByPlaca(veiculoSaveDTO.getPlaca());
+        if(veiculoJaFoiCadastrado) {
+            throw new DatabaseException("Veículo já cadastrado");
+        }
+
         var veiculo = Veiculo.ofSave(veiculoSaveDTO);
         repository.save(veiculo);
         return VeiculoDTO.of(veiculo);

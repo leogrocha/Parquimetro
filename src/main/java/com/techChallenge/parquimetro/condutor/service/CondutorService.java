@@ -7,6 +7,7 @@ import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
+import com.techChallenge.parquimetro.config.exceptions.DatabaseException;
 import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import com.techChallenge.parquimetro.condutor.repository.CondutorRepository;
 import com.techChallenge.parquimetro.endereco.dto.EnderecoSaveDTO;
@@ -18,6 +19,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 
@@ -43,9 +45,17 @@ public class CondutorService {
     }
     @Transactional
     public CondutorDTO save(CondutorSaveDTO condutorSaveDTO) {
+
+        // TODO - Verificar melhor maneira de padronização dessa validação
+        boolean cpfJaFoiCadastrado = repository.existsByCpf(condutorSaveDTO.getCpf());
+        if(cpfJaFoiCadastrado) {
+            throw new DatabaseException("CPF já cadastrado na base de dados.");
+        }
+
         var endereco = enderecoRepository.save(Endereco.ofSave(condutorSaveDTO.getEndereco()));
         var condutor = repository.save(Condutor.ofSave(condutorSaveDTO, endereco));
         return CondutorDTO.of(condutor);
+
     }
 
     @Transactional

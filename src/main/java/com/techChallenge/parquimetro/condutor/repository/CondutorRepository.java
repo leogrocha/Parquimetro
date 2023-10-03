@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface CondutorRepository extends JpaRepository<Condutor, Long>, JpaSpecificationExecutor<Condutor> {
 
 
+    boolean existsByCpf(String cpf);
 }

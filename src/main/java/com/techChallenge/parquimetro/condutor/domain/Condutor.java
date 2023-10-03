@@ -28,6 +28,7 @@ public class Condutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long condutorId;
     private String nome;
+    @Column(unique = true)
     private String cpf;
     private String telefone;
     private String email;
