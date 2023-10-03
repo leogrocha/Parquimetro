@@ -5,6 +5,7 @@ import com.techChallenge.parquimetro.registro.service.RegistroService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,10 @@ public class RegistroController {
     @GetMapping
     public ResponseEntity<List<RegistroDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
+    }
+
+    @GetMapping("/{registroId}")
+    public ResponseEntity<RegistroDTO> findById(@PathVariable Long registroId) {
+        return ResponseEntity.ok(service.findById(registroId));
     }
 }

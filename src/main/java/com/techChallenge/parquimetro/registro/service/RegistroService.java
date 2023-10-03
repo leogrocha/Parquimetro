@@ -1,5 +1,6 @@
 package com.techChallenge.parquimetro.registro.service;
 
+import com.techChallenge.parquimetro.config.exceptions.ControllerNotFoundException;
 import com.techChallenge.parquimetro.registro.domain.Registro;
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.repository.RegistroRepository;
@@ -19,4 +20,12 @@ public class RegistroService {
     public List<RegistroDTO> findAll() {
         return repository.findAll().stream().map(RegistroDTO::of).toList();
     }
+
+    @Transactional(readOnly = true)
+    public RegistroDTO findById(Long registroId) {
+        return repository.findById(registroId)
+                .stream().map(RegistroDTO::of).findFirst()
+                .orElseThrow(() -> new ControllerNotFoundException("Registro não encontrado. ID: " + registroId));
+    }
+
 }
