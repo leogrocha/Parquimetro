@@ -8,3 +8,5 @@ insert into tb_veiculo (marca, modelo, placa, ano_fabricacao) values ('Fiat UNO'
 insert into tb_condutor_veiculo (condutor_id, veiculo_id) values (1,1);
 insert into tb_condutor_veiculo (condutor_id, veiculo_id) values (1,2);
 
+insert into tb_registro (duracao_desejada, forma_pagamento, periodo_estacionamento, condutor_id, veiculo_id, inicio_registro, tarifa_aplicada, valor_total) values (2, 'PIX', 'FIXO', 1,1, now(), 2, 4);
+

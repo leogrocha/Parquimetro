@@ -28,27 +28,12 @@ public class CondutorDTO {
     private EnderecoDTO endereco;
     private List<VeiculoMinDTO> veiculos = new ArrayList<>();
 
-
-    public CondutorDTO(Condutor condutor) {
-        condutorId = condutor.getCondutorId();
-        nome = condutor.getNome();
-        cpf = condutor.getCpf();
-        telefone = condutor.getTelefone();
-        email = condutor.getEmail();
-        formaPagamento = condutor.getFormaPagamento();
-        endereco = new EnderecoDTO(condutor.getEndereco());
-        for (Veiculo veiculo : condutor.getVeiculos()) {
-            veiculos.add(new VeiculoMinDTO(veiculo));
-        }
-    }
-
-
     public static CondutorDTO of(Condutor condutor) {
         var condutorDTO = new CondutorDTO();
-        condutorDTO.setEndereco(new EnderecoDTO((condutor.getEndereco())));
+        condutorDTO.setEndereco(EnderecoDTO.of(condutor.getEndereco()));
         List<VeiculoMinDTO> veiculos = new ArrayList<>();
         for (Veiculo veiculo : condutor.getVeiculos()) {
-            veiculos.add(new VeiculoMinDTO(veiculo));
+            veiculos.add(VeiculoMinDTO.of(veiculo));
         }
         condutorDTO.setVeiculos(veiculos);
         BeanUtils.copyProperties(condutor, condutorDTO);

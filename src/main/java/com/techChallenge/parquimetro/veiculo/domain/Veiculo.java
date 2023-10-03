@@ -1,6 +1,7 @@
 package com.techChallenge.parquimetro.veiculo.domain;
 
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
+import com.techChallenge.parquimetro.registro.domain.Registro;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoSaveDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoUpdateDTO;
 import jakarta.persistence.*;
@@ -31,6 +32,9 @@ public class Veiculo {
     @ManyToMany(mappedBy = "veiculos")
     @Setter(AccessLevel.NONE)
     private Set<Condutor> condutores = new HashSet<>();
+
+    @OneToMany(mappedBy = "veiculo")
+    private Set<Registro> registros = new HashSet<>();
 
     public static Veiculo ofSave(VeiculoSaveDTO veiculoSaveDTO) {
         var veiculo = new Veiculo();

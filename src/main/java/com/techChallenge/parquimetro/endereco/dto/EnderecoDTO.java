@@ -2,6 +2,7 @@ package com.techChallenge.parquimetro.endereco.dto;
 
 import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,19 +20,15 @@ public class EnderecoDTO{
     private String cep;
     private String municipio;
 
-    public EnderecoDTO(Endereco endereco) {
-        this(endereco.getEnderecoId(), endereco.getLogradouro(), endereco.getBairro(),
-                endereco.getNumero(), endereco.getComplemento(), endereco.getCep(),
-                endereco.getMunicipio());
+    public static EnderecoDTO of(Endereco endereco) {
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        BeanUtils.copyProperties(endereco, enderecoDTO);
+        return enderecoDTO;
     }
 
-    public EnderecoDTO(EnderecoUpdateDTO enderecoUpdateDTO) {
-        enderecoId=enderecoUpdateDTO.getEnderecoId();
-        logradouro=enderecoUpdateDTO.getLogradouro();
-        bairro=enderecoUpdateDTO.getBairro();
-        numero=enderecoUpdateDTO.getNumero();
-        complemento=enderecoUpdateDTO.getComplemento();
-        cep=enderecoUpdateDTO.getCep();
-        municipio=enderecoUpdateDTO.getMunicipio();
+    public static EnderecoDTO ofUpdate(EnderecoUpdateDTO enderecoUpdateDTO) {
+        EnderecoDTO enderecoDTO = new EnderecoDTO();
+        BeanUtils.copyProperties(enderecoUpdateDTO, enderecoDTO);
+        return enderecoDTO;
     }
 }

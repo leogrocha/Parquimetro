@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.beans.BeanUtils;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,10 +32,11 @@ public class CondutorSaveDTO {
     @NotNull(message = "Endereço não pode ser nulo")
     private EnderecoSaveDTO endereco;
 
-    public CondutorSaveDTO(Condutor condutor) {
-        this(condutor.getNome(), condutor.getCpf(),
-                condutor.getTelefone(), condutor.getEmail(),
-                condutor.getFormaPagamento(), condutor.getEndereco() != null ? new EnderecoSaveDTO(condutor.getEndereco()) : null);
+    public static CondutorSaveDTO of(Condutor condutor) {
+        CondutorSaveDTO condutorSaveDTO = new CondutorSaveDTO();
+        condutorSaveDTO.setEndereco(condutor.getEndereco() != null ? EnderecoSaveDTO.of(condutor.getEndereco()) : null);
+        BeanUtils.copyProperties(condutor, condutorSaveDTO);
+        return condutorSaveDTO;
     }
 
 

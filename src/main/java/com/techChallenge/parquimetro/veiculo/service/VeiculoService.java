@@ -30,7 +30,7 @@ public class VeiculoService {
     @Transactional(readOnly = true)
     public VeiculoDTO findById(Long veiculoId) {
         return repository.findById(veiculoId)
-                .stream().map(VeiculoDTO::new).findFirst()
+                .stream().map(VeiculoDTO::of).findFirst()
                 .orElseThrow(() -> new ControllerNotFoundException("Veículo não encontrado"));
     }
 

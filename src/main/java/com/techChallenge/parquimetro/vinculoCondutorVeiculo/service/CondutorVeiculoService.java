@@ -35,7 +35,6 @@ public class CondutorVeiculoService {
         }
 
         condutor.getVeiculos().add(veiculo);
-        CondutorDTO condutorFinal = condutorService.updateCondutorVeiculo(new CondutorUpdateDTO(condutor), veiculo, condutorId);
-        return condutorFinal;
+        return condutorService.updateCondutorVeiculo(CondutorUpdateDTO.of(condutor), veiculo, condutorId);
     }
 }
