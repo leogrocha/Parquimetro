@@ -1,10 +1,8 @@
-package com.techChallenge.parquimetro.vinculoCondutorVeiculo.controller;
+package com.techChallenge.parquimetro.condutorVeiculo.controller;
 
 import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
-import com.techChallenge.parquimetro.config.patterns.ResponseApi;
-import com.techChallenge.parquimetro.vinculoCondutorVeiculo.service.CondutorVeiculoService;
+import com.techChallenge.parquimetro.condutorVeiculo.service.CondutorVeiculoService;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,7 @@
-package com.techChallenge.parquimetro.vinculoCondutorVeiculo.service;
+package com.techChallenge.parquimetro.condutorVeiculo.service;
 
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.condutor.dto.CondutorDTO;
-import com.techChallenge.parquimetro.condutor.dto.CondutorSaveDTO;
 import com.techChallenge.parquimetro.condutor.dto.CondutorUpdateDTO;
 import com.techChallenge.parquimetro.condutor.repository.CondutorRepository;
 import com.techChallenge.parquimetro.condutor.service.CondutorService;
@@ -11,7 +10,6 @@ import com.techChallenge.parquimetro.config.exceptions.DatabaseException;
 import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

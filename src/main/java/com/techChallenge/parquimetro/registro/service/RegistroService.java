@@ -8,7 +8,7 @@ import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.repository.RegistroRepository;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
-import com.techChallenge.parquimetro.vinculoCondutorVeiculo.service.CondutorVeiculoService;
+import com.techChallenge.parquimetro.condutorVeiculo.service.CondutorVeiculoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
