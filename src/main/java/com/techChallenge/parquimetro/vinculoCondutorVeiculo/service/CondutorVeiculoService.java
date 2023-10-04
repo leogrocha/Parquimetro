@@ -8,6 +8,7 @@ import com.techChallenge.parquimetro.condutor.repository.CondutorRepository;
 import com.techChallenge.parquimetro.condutor.service.CondutorService;
 import com.techChallenge.parquimetro.config.exceptions.ControllerNotFoundException;
 import com.techChallenge.parquimetro.config.exceptions.DatabaseException;
+import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,13 @@ public class CondutorVeiculoService {
 
         condutor.getVeiculos().add(veiculo);
         return condutorService.updateCondutorVeiculo(CondutorUpdateDTO.of(condutor), veiculo, condutorId);
+    }
+
+    public void validarSeCondutorEVeiculoEstaoVinculados(Condutor condutor, Veiculo veiculo) {
+        condutor.getVeiculos().stream()
+                .filter(veiculoFilter -> veiculoFilter == veiculo)
+                .findFirst().orElseThrow(() ->
+                        new DatabaseException("Condutor e veículo não vinculados"));
+
     }
 }

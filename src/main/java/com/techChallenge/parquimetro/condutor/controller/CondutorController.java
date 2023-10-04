@@ -33,7 +33,6 @@ public class CondutorController {
 
     @PostMapping
     public ResponseEntity<CondutorDTO> save(@RequestBody @Valid CondutorSaveDTO condutorSaveDTO) {
-        System.out.println(condutorSaveDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
         return ResponseEntity.created(uri).body(service.save(condutorSaveDTO));
     }

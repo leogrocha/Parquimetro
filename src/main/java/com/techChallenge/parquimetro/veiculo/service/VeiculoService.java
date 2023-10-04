@@ -37,13 +37,7 @@ public class VeiculoService {
 
     @Transactional
     public VeiculoDTO save(VeiculoSaveDTO veiculoSaveDTO) {
-
-        // TODO - Verificar melhor maneira de padronização dessa validação
-        boolean veiculoJaFoiCadastrado = repository.existsByPlaca(veiculoSaveDTO.getPlaca());
-        if(veiculoJaFoiCadastrado) {
-            throw new DatabaseException("Veículo já cadastrado");
-        }
-
+        validarSeVeiculoJaFoiCadastrado(veiculoSaveDTO.getPlaca());
         var veiculo = Veiculo.ofSave(veiculoSaveDTO);
         repository.save(veiculo);
         return VeiculoDTO.of(veiculo);
@@ -60,7 +54,12 @@ public class VeiculoService {
         return VeiculoDTO.of(veiculo);
     }
 
-
+    public void validarSeVeiculoJaFoiCadastrado(String placa) {
+        boolean veiculoJaFoiCadastrado = repository.existsByPlaca(placa);
+        if(veiculoJaFoiCadastrado) {
+            throw new DatabaseException("Veículo já cadastrado com a placa " + placa);
+        }
+    }
 
 
 

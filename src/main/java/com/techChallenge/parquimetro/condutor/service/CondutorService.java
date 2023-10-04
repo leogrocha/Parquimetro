@@ -45,13 +45,7 @@ public class CondutorService {
     }
     @Transactional
     public CondutorDTO save(CondutorSaveDTO condutorSaveDTO) {
-
-        // TODO - Verificar melhor maneira de padronização dessa validação
-        boolean cpfJaFoiCadastrado = repository.existsByCpf(condutorSaveDTO.getCpf());
-        if(cpfJaFoiCadastrado) {
-            throw new DatabaseException("CPF já cadastrado na base de dados.");
-        }
-
+        validarSeCpfJaFoiCadastrado(condutorSaveDTO.getCpf());
         var endereco = enderecoRepository.save(Endereco.ofSave(condutorSaveDTO.getEndereco()));
         var condutor = repository.save(Condutor.ofSave(condutorSaveDTO, endereco));
         return CondutorDTO.of(condutor);
@@ -93,6 +87,13 @@ public class CondutorService {
             throw new ControllerNotFoundException("Condutor não encontrado, id: " + condutorId);
         }
 
+    }
+
+    public void validarSeCpfJaFoiCadastrado(String cpf) {
+        boolean cpfJaFoiCadastrado = repository.existsByCpf(cpf);
+        if(cpfJaFoiCadastrado) {
+            throw new DatabaseException("CPF já cadastrado na base de dados.");
+        }
     }
 
 

@@ -1,14 +1,14 @@
 package com.techChallenge.parquimetro.registro.controller;
 
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
+import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.service.RegistroService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -26,5 +26,11 @@ public class RegistroController {
     @GetMapping("/{registroId}")
     public ResponseEntity<RegistroDTO> findById(@PathVariable Long registroId) {
         return ResponseEntity.ok(service.findById(registroId));
+    }
+
+    @PostMapping
+    public ResponseEntity<RegistroDTO> save(@RequestBody RegistroSaveDTO registroSaveDTO) {
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
+        return ResponseEntity.created(uri).body(service.save(registroSaveDTO));
     }
 }
