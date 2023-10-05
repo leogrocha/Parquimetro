@@ -43,9 +43,14 @@ public class Registro {
     @JoinColumn(name = "condutor_id", nullable = false)
     private Condutor condutor;
 
-    public Long calculaDuracaoHorasEstacionamento() {
-         Duration duration = Duration.between(inicioRegistro, fimRegistro);
-         return duration.toHours();
+    public BigDecimal calculaValorTotal(PeriodoEstacionamento periodoEstacionamento) {
+        Long duracaoAtual = periodoEstacionamento == PeriodoEstacionamento.FIXO ? this.duracaoDesejada : calculaQtdeHoras();
+        return getTarifaAplicada().multiply(new BigDecimal(duracaoAtual));
+    }
+
+    public Long calculaQtdeHoras() {
+        LocalDateTime duracaoAtual = this.fimRegistro == null ? LocalDateTime.now() : this.fimRegistro;
+        return Duration.between(this.inicioRegistro, duracaoAtual).toHours();
     }
 
     public static Registro ofSave(RegistroSaveDTO registroSaveDTO, Condutor condutor, Veiculo veiculo) {
