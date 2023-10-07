@@ -7,6 +7,7 @@ import com.techChallenge.parquimetro.registro.domain.Registro;
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.repository.RegistroRepository;
+import com.techChallenge.parquimetro.registro.service.notificacoes.NotificacaoPorHora;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
 import com.techChallenge.parquimetro.condutorVeiculo.service.CondutorVeiculoService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ public class RegistroService {
     private final CondutorRepository condutorRepository;
     private final VeiculoRepository veiculoRepository;
     private final CondutorVeiculoService condutorVeiculoService;
+
+    private final NotificacaoPorHora notificacaoPorHora;
 
     @Transactional(readOnly = true)
     public List<RegistroDTO> findAll() {
@@ -44,6 +47,7 @@ public class RegistroService {
         condutorVeiculoService.validarSeCondutorEVeiculoEstaoVinculados(condutor, veiculo);
         FormaPagamento.formaPagamentoPixEPeriodoEstacionamentoPorHora(registroSaveDTO.getPeriodoEstacionamento(), registroSaveDTO.getFormaPagamento());
         var registro = repository.save(Registro.ofSave(registroSaveDTO, condutor, veiculo));
+        notificacaoPorHora.enviarNotificacao(registro);
         return RegistroDTO.of(registro);
     }
 
