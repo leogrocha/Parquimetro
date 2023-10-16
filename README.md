@@ -38,4 +38,4 @@ Embora a arquitetura seja monolítica, medidas são tomadas para garantir escala
 
 ---
 
-Este relatório técnico fornece uma visão geral da implementação do Sistema de Parquímetro, destacando a arquitetura monolítica, o uso de contêineres Docker, notificações com AWS SNS e estratégias de otimização de banco de dados. Ele também aborda as considerações de escalabilidade. Para obter mais detalhes e instruções de execução, consulte o [README.md](link-do-seu-readme.md) do repositório.
+Este relatório técnico fornece uma visão geral da implementação do Sistema de Parquímetro, destacando a arquitetura monolítica, o uso de contêineres Docker, notificações com AWS SNS e estratégias de otimização de banco de dados. Ele também aborda as considerações de escalabilidade.
