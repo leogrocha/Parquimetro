@@ -7,13 +7,14 @@ import com.techChallenge.parquimetro.registro.domain.Registro;
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.repository.RegistroRepository;
-import com.techChallenge.parquimetro.registro.service.notificacoes.NotificacaoPorHora;
+import com.techChallenge.parquimetro.registro.service.notifications.NotificacaoPorHora;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
 import com.techChallenge.parquimetro.condutorVeiculo.service.CondutorVeiculoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -47,7 +48,16 @@ public class RegistroService {
         condutorVeiculoService.validarSeCondutorEVeiculoEstaoVinculados(condutor, veiculo);
         FormaPagamento.formaPagamentoPixEPeriodoEstacionamentoPorHora(registroSaveDTO.getPeriodoEstacionamento(), registroSaveDTO.getFormaPagamento());
         var registro = repository.save(Registro.ofSave(registroSaveDTO, condutor, veiculo));
-        notificacaoPorHora.enviarNotificacao(registro);
+        notificacaoPorHora.enviarNotificacaoPorHora();
+        return RegistroDTO.of(registro);
+    }
+
+    @Transactional
+    public RegistroDTO finishRegister(Long registroId) {
+        var registro = repository.findById(registroId)
+                .orElseThrow(() -> new ControllerNotFoundException("Registro não encontrado."));
+        registro.setFimRegistro(LocalDateTime.now());
+        repository.save(registro);
         return RegistroDTO.of(registro);
     }
 

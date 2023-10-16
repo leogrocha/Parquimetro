@@ -33,4 +33,9 @@ public class RegistroController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
         return ResponseEntity.created(uri).body(service.save(registroSaveDTO));
     }
+
+    @PutMapping("finish/{registroId}")
+    public ResponseEntity<RegistroDTO> finishRegister(@PathVariable Long registroId) {
+        return ResponseEntity.ok(service.finishRegister(registroId));
+    }
 }

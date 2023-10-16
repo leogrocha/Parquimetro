@@ -26,7 +26,7 @@ public class RegistroSaveDTO {
     private BigDecimal tarifaAplicada;
     private BigDecimal valorTotal;
     private LocalDateTime inicioRegistro;
-    private LocalDateTime dataConclusao;
+    private LocalDateTime fimRegistro;
     private Long condutorId;
     private Long veiculoId;
 

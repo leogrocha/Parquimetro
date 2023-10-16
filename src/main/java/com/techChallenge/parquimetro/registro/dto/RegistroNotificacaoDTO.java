@@ -6,10 +6,14 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Getter
 @Setter
 public class RegistroNotificacaoDTO {
 
     private String message;
+
+    @Override
+    public String toString() {
+        return message;
+    }
 }

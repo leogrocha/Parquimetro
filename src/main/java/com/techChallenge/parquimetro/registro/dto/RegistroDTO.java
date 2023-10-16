@@ -26,7 +26,7 @@ public class RegistroDTO {
     private BigDecimal tarifaAplicada;
     private BigDecimal valorTotal;
     private LocalDateTime inicioRegistro;
-    private LocalDateTime dataConclusao;
+    private LocalDateTime fimRegistro;
     private CondutorRegistroDTO condutor;
     private VeiculoMinDTO veiculo;
 
