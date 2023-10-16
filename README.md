@@ -51,6 +51,23 @@ Embora a arquitetura seja monolítica, medidas são tomadas para garantir escala
 - A configuração adequada de recursos no ambiente de execução permite escalonar verticalmente quando necessário.
 - O uso de caches e otimizações de banco de dados ajuda a manter o desempenho à medida que o sistema cresce.
 
+### Ferramentas e Tecnologias Utilizadas
+
+- **Linguagem de Programação:** Java
+- **Framework:** Spring Boot
+- **Contêineres:** Docker
+- **Serviço de Notificação:** AWS SNS
+
+### Desafios Encontrados
+
+Durante a implementação do Sistema de Parquímetro, enfrentamos vários desafios, incluindo:
+
+- **Escalabilidade:** A arquitetura monolítica, embora ofereça simplicidade, pode apresentar desafios de escalabilidade à medida que o aplicativo cresce. Implementamos estratégias para escalabilidade vertical e replicação de containers para lidar com isso.
+
+- **Otimização de Banco de Dados:** Garantir que as consultas ao banco de dados sejam eficientes foi um desafio, especialmente ao lidar com grande volume de dados. Implementamos caching e processamento em lote para mitigar esse desafio.
+
+- **Integração com AWS SNS:** A integração com o serviço AWS SNS para notificações em tempo real exigiu um entendimento aprofundado da API e configuração adequada.
+
 ---
 
 Este relatório técnico fornece uma visão geral da implementação do Sistema de Parquímetro, destacando a arquitetura monolítica, o uso de contêineres Docker, notificações com AWS SNS e estratégias de otimização de banco de dados. Ele também aborda as considerações de escalabilidade.
