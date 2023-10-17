@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface RegistroRepository extends JpaRepository<Registro, Long> {
-    @Query(nativeQuery = true, value = "SELECT tbc.nome, tbr.valor_total FROM tb_registro tbr\n" +
+    @Query(nativeQuery = true, value = "SELECT tbc.nome, tbr.valor_total, tbr.inicio_registro FROM tb_registro tbr\n" +
             "inner join tb_condutor tbc ON tbr.condutor_id  = tbc.condutor_id\n" +
             " where tbr.fim_registro is null")
     List<RegistroPendentesProjection> findAllByFimRegistroNull();
