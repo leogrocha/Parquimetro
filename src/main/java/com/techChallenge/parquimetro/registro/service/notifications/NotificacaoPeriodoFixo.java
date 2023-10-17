@@ -34,20 +34,21 @@ public class NotificacaoPeriodoFixo {
 
                 LocalDateTime fimRegistro = registro.getFimRegistro();
                 LocalDateTime agora = LocalDateTime.now();
-                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(30);
-                boolean enviarNotificacao = agora.equals(trintaMinutosAntesFimRegistro);
+                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(59);
+                boolean enviarNotificacao = agora.isAfter(trintaMinutosAntesFimRegistro);
 
                 if(enviarNotificacao) {
                     RegistroNotificacaoDTO registroNotificacaoDTO = new RegistroNotificacaoDTO();
                     String message = registro.getCondutor().getNome() + " faltam 30 minutos para o fim do período estacionado. \n Valor atual R$" + registro.getValorTotal();
                     registroNotificacaoDTO.setMessage(message);
+                    registrosAtivos.put(registroId, false);
                     System.out.println(registroNotificacaoDTO);
-                } else registrosAtivos.put(registroId, false);
+                }
             }
 
             registrosAtivos.entrySet().stream().map(register -> "Registros ativos: " + register).forEach(System.out::println);
 
-        }, 5, 60, TimeUnit.SECONDS); // Executa a cada hora
+        }, 5, 30, TimeUnit.SECONDS); // Executa a cada hora
     }
 
 }
