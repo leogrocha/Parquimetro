@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @AllArgsConstructor
@@ -17,7 +20,8 @@ public class CondutorVeiculoController {
 
     @PostMapping("/associar")
     public ResponseEntity<CondutorDTO> associar(@RequestParam Long condutorId, @RequestParam Long veiculoId) {
-        return ResponseEntity.ok(service.associationCondutorVeiculo(condutorId, veiculoId));
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
+        return ResponseEntity.created(uri).body(service.associationCondutorVeiculo(condutorId, veiculoId));
     }
 
     @DeleteMapping("/desvincular")

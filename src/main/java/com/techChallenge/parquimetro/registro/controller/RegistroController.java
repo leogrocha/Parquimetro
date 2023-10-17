@@ -3,6 +3,7 @@ package com.techChallenge.parquimetro.registro.controller;
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.service.RegistroService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class RegistroController {
     }
 
     @PostMapping
-    public ResponseEntity<RegistroDTO> save(@RequestBody RegistroSaveDTO registroSaveDTO) {
+    public ResponseEntity<RegistroDTO> save(@Valid @RequestBody RegistroSaveDTO registroSaveDTO) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
         return ResponseEntity.created(uri).body(service.save(registroSaveDTO));
     }

@@ -32,8 +32,8 @@ public class Registro {
     private FormaPagamento formaPagamento;
     private BigDecimal tarifaAplicada;
     private BigDecimal valorTotal;
-    private LocalDateTime inicioRegistro;
-    private LocalDateTime fimRegistro;
+    private LocalDateTime inicioRegistro = LocalDateTime.now();
+    private LocalDateTime fimRegistro = null;
 
     @ManyToOne
     @JoinColumn(name = "veiculo_id", nullable = false)
@@ -43,15 +43,6 @@ public class Registro {
     @JoinColumn(name = "condutor_id", nullable = false)
     private Condutor condutor;
 
-    public BigDecimal calculaValorTotal(PeriodoEstacionamento periodoEstacionamento) {
-        Long duracaoAtual = periodoEstacionamento == PeriodoEstacionamento.FIXO ? this.duracaoDesejada : calculaQtdeHoras();
-        return getTarifaAplicada().multiply(new BigDecimal(duracaoAtual));
-    }
-
-    public Long calculaQtdeHoras() {
-        LocalDateTime duracaoAtual = this.fimRegistro == null ? LocalDateTime.now() : this.fimRegistro;
-        return Duration.between(this.inicioRegistro, duracaoAtual).toHours();
-    }
 
     public static Registro ofSave(RegistroSaveDTO registroSaveDTO, Condutor condutor, Veiculo veiculo) {
         Registro registro = new Registro();
@@ -60,5 +51,13 @@ public class Registro {
         BeanUtils.copyProperties(registroSaveDTO, registro);
         return registro;
     }
+    public Long calculaQtdeHoras() {
+        LocalDateTime duracaoAtual = this.fimRegistro == null ? LocalDateTime.now() : this.fimRegistro;
+        return Duration.between(this.inicioRegistro, duracaoAtual).toHours();
+    }
 
+    public BigDecimal getValorTotal() {
+        Long duracaoAtual = this.periodoEstacionamento == PeriodoEstacionamento.FIXO ? this.duracaoDesejada : calculaQtdeHoras();
+        return getTarifaAplicada().multiply(new BigDecimal(duracaoAtual));
+    }
 }
