@@ -9,6 +9,7 @@ import com.techChallenge.parquimetro.registro.domain.Registro;
 import com.techChallenge.parquimetro.registro.dto.RegistroDTO;
 import com.techChallenge.parquimetro.registro.dto.RegistroSaveDTO;
 import com.techChallenge.parquimetro.registro.repository.RegistroRepository;
+import com.techChallenge.parquimetro.registro.service.notifications.NotificacaoPeriodoFixo;
 import com.techChallenge.parquimetro.registro.service.notifications.NotificacaoPorHora;
 import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import com.techChallenge.parquimetro.veiculo.repository.VeiculoRepository;
@@ -31,6 +32,7 @@ public class RegistroService {
     private final CondutorVeiculoService condutorVeiculoService;
 
     private final NotificacaoPorHora notificacaoPorHora;
+    private final NotificacaoPeriodoFixo notificacaoPeriodoFixo;
 
     @Transactional(readOnly = true)
     public List<RegistroDTO> findAll() {
@@ -54,10 +56,15 @@ public class RegistroService {
         condutorVeiculoService.validarSeCondutorEVeiculoEstaoVinculados(condutor, veiculo);
         FormaPagamento.formaPagamentoPixEPeriodoEstacionamentoPorHora(registroSaveDTO.getPeriodoEstacionamento(), registroSaveDTO.getFormaPagamento());
         validacaoDuracaoDesejadaComPeriodoFixo(registroSaveDTO.getPeriodoEstacionamento(), registroSaveDTO.getDuracaoDesejada());
+
+
         var registro = repository.save(Registro.ofSave(registroSaveDTO, condutor, veiculo));
-        if(registroSaveDTO.getPeriodoEstacionamento() == PeriodoEstacionamento.POR_HORA) {
+        if (registroSaveDTO.getPeriodoEstacionamento() == PeriodoEstacionamento.POR_HORA) {
             notificacaoPorHora.enviarNotificacaoPorHora(registro.getRegistroId());
+        } else {
+            notificacaoPeriodoFixo.enviarNotificacaoPeriodoFixo(registro.getRegistroId());
         }
+
         return RegistroDTO.of(registro);
     }
 
@@ -65,7 +72,9 @@ public class RegistroService {
     public RegistroDTO finishRegister(Long registroId) {
         var registro = repository.findById(registroId)
                 .orElseThrow(() -> new ControllerNotFoundException("Registro não encontrado."));
-        registro.setFimRegistro(LocalDateTime.now());
+        if(registro.getPeriodoEstacionamento() == PeriodoEstacionamento.POR_HORA) {
+            registro.setFimRegistro(LocalDateTime.now());
+        }
         repository.save(registro);
         return RegistroDTO.of(registro);
     }

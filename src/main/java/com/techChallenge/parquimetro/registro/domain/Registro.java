@@ -33,7 +33,7 @@ public class Registro {
     private BigDecimal tarifaAplicada;
     private BigDecimal valorTotal;
     private LocalDateTime inicioRegistro = LocalDateTime.now();
-    private LocalDateTime fimRegistro = null;
+    private LocalDateTime fimRegistro;
 
     @ManyToOne
     @JoinColumn(name = "veiculo_id", nullable = false)
@@ -45,9 +45,11 @@ public class Registro {
 
 
     public static Registro ofSave(RegistroSaveDTO registroSaveDTO, Condutor condutor, Veiculo veiculo) {
+        LocalDateTime fimRegistro = registroSaveDTO.getPeriodoEstacionamento() == PeriodoEstacionamento.FIXO ? LocalDateTime.now().plusHours(registroSaveDTO.getDuracaoDesejada()) : null;
         Registro registro = new Registro();
         registro.setVeiculo(veiculo);
         registro.setCondutor(condutor);
+        registro.setFimRegistro(fimRegistro);
         BeanUtils.copyProperties(registroSaveDTO, registro);
         return registro;
     }
