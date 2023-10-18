@@ -41,6 +41,8 @@ public class NotificacaoPorHora {
             registrosAtivos.entrySet().stream().map(register -> "Registros ativos: " + register).forEach(System.out::println);
 
         }, 5, 30, TimeUnit.SECONDS); // Executa a cada hora
+
+        // TODO - Adicionar período de uma hora, apenas teste......
     }
 
 }

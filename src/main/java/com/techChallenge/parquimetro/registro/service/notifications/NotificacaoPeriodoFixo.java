@@ -34,7 +34,7 @@ public class NotificacaoPeriodoFixo {
 
                 LocalDateTime fimRegistro = registro.getFimRegistro();
                 LocalDateTime agora = LocalDateTime.now();
-                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(59);
+                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(30);
                 boolean enviarNotificacao = agora.isAfter(trintaMinutosAntesFimRegistro);
 
                 if(enviarNotificacao) {
@@ -49,6 +49,7 @@ public class NotificacaoPeriodoFixo {
             registrosAtivos.entrySet().stream().map(register -> "Registros ativos: " + register).forEach(System.out::println);
 
         }, 5, 30, TimeUnit.SECONDS); // Executa a cada hora
+        // TODO - Adicionar período de uma hora, apenas teste......
     }
 
 }
