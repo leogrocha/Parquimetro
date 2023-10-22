@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  parquimetro:
+    image: parquimetro:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+  # Add other services like databases, caches, etc. as needed.
