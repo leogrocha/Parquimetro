@@ -8,7 +8,7 @@ public class CondutorSpecifications {
 
     public static Specification<Condutor> byNome(String nome) {
         return (root, query, criteriaBuilder)
-                -> nome == null ? null : criteriaBuilder.like(root.get("placa"), "%" + nome + "%");
+                -> nome == null ? null : criteriaBuilder.like(root.get("nome"), "%" + nome + "%");
     }
 
     public static Specification<Condutor> byCpf(String cpf) {

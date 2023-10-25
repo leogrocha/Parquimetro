@@ -23,7 +23,8 @@ public class RegistroSaveDTO {
     private Integer duracaoDesejada;
     @NotNull(message = "Forma de pagamento não pode ser nula.")
     private FormaPagamento formaPagamento;
-    @Positive(message = "tarifa aplicada não pode ser menor do que 0.")
+    @Positive(message = "Tarifa aplicada não pode ser menor do que 0.")
+    @NotNull(message = "Tarifa aplicada não pode ser nula.")
     private BigDecimal tarifaAplicada;
     @NotNull(message = "Condutor não poder ser nulo.")
     private Long condutorId;

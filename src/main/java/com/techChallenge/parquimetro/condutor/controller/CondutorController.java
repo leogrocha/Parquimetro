@@ -32,13 +32,13 @@ public class CondutorController {
     }
 
     @PostMapping
-    public ResponseEntity<CondutorDTO> save(@RequestBody @Valid CondutorSaveDTO condutorSaveDTO) {
+    public ResponseEntity<CondutorDTO> save(@Valid @RequestBody CondutorSaveDTO condutorSaveDTO) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(("/{id}")).toUri();
         return ResponseEntity.created(uri).body(service.save(condutorSaveDTO));
     }
 
     @PutMapping("/{condutorId}")
-    public ResponseEntity<CondutorDTO> update(@RequestBody @Valid CondutorUpdateDTO condutorUpdateDTO, @PathVariable Long condutorId) {
+    public ResponseEntity<CondutorDTO> update(@Valid @RequestBody CondutorUpdateDTO condutorUpdateDTO, @PathVariable Long condutorId) {
         return ResponseEntity.ok(service.update(condutorUpdateDTO, condutorId));
     }
 

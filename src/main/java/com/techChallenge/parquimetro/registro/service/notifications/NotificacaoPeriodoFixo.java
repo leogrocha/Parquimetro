@@ -34,7 +34,7 @@ public class NotificacaoPeriodoFixo {
 
                 LocalDateTime fimRegistro = registro.getFimRegistro();
                 LocalDateTime agora = LocalDateTime.now();
-                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(30);
+                LocalDateTime trintaMinutosAntesFimRegistro = fimRegistro.minusMinutes(59);
                 boolean enviarNotificacao = agora.isAfter(trintaMinutosAntesFimRegistro);
 
                 if(enviarNotificacao) {

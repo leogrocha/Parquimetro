@@ -3,6 +3,7 @@ package com.techChallenge.parquimetro.condutor.dto;
 import com.techChallenge.parquimetro.endereco.dto.EnderecoSaveDTO;
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.condutor.domain.FormaPagamento;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class CondutorSaveDTO {
     @NotNull(message = "Forma de pagamento não pode ser nula.")
     private FormaPagamento formaPagamento;
     @NotNull(message = "Endereço não pode ser nulo")
-    private EnderecoSaveDTO endereco;
+    @Valid private EnderecoSaveDTO endereco;
 
     public static CondutorSaveDTO of(Condutor condutor) {
         CondutorSaveDTO condutorSaveDTO = new CondutorSaveDTO();
