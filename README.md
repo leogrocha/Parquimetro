@@ -57,6 +57,9 @@ Embora a arquitetura seja monolítica, medidas são tomadas para garantir escala
 - **Framework:** Spring Boot
 - **Contêineres:** Docker
 - **Serviço de Notificação:** AWS SNS
+- **Frameworks e Bibliotecas:** Spring Batch, Lombok, Bean Validation, JPA
+- **Padrão de Projeto:** Camada MVC
+
 
 ### Desafios Encontrados
 
@@ -67,6 +70,17 @@ Durante a implementação do Sistema de Parquímetro, enfrentamos vários desafi
 - **Otimização de Banco de Dados:** Garantir que as consultas ao banco de dados sejam eficientes foi um desafio, especialmente ao lidar com grande volume de dados. Implementamos caching e processamento em lote para mitigar esse desafio.
 
 - **Integração com AWS SNS:** A integração com o serviço AWS SNS para notificações em tempo real exigiu um entendimento aprofundado da API e configuração adequada.
+
+- **Construção de Projeto em Camada:** A estruturação do projeto em camadas no formato MVC exigiu a definição clara de responsabilidades de cada componente, facilitando a manutenção e o desenvolvimento futuro.
+
+- **Annotations no Spring Boot:** A utilização de anotações como Lombok e Bean Validation simplificou o código, tornando-o menos verboso e mais fácil de ser mantido.
+
+- **Utilização de DTO:** A adoção de objetos de transferência de dados (DTO) aprimorou a segurança das informações trafegadas na API, mantendo a responsabilidade das classes de domínio separada.
+
+- **JPA para Manipulação do Banco de Dados:** O uso do JPA simplificou a manipulação do banco de dados, aproveitando os métodos úteis já existentes e facilitando a criação de consultas personalizadas.
+
+- **Validação de Erros nas Requisições:** Através do ControlerAdvice do Spring, conseguimos criar tratativas específicas para possíveis exceções que podem ocorrer nas requisições, retornando erros claros com seus respectivos códigos de status HTTP.
+
 
 ---
 
