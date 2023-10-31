@@ -5,6 +5,7 @@ import com.techChallenge.parquimetro.endereco.dto.EnderecoSaveDTO;
 import com.techChallenge.parquimetro.endereco.dto.EnderecoUpdateDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 @Entity
 @Table(name = "tb_endereco")
@@ -29,24 +30,20 @@ public class Endereco {
     @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
     private Condutor condutor;
 
-    public Endereco(EnderecoSaveDTO enderecoDTO) {
-        logradouro = enderecoDTO.getLogradouro();
-        bairro = enderecoDTO.getBairro();
-        numero = enderecoDTO.getNumero();
-        complemento = enderecoDTO.getComplemento();
-        cep = enderecoDTO.getCep();
-        municipio= enderecoDTO.getMunicipio();
+
+    public static Endereco ofSave(EnderecoSaveDTO enderecoSaveDTO) {
+        Endereco endereco = new Endereco();
+        BeanUtils.copyProperties(enderecoSaveDTO, endereco);
+        return endereco;
     }
 
-    public Endereco(EnderecoUpdateDTO enderecoUpdateDTO) {
-        enderecoId = enderecoUpdateDTO.getEnderecoId();
-        logradouro = enderecoUpdateDTO.getLogradouro() != null ? enderecoUpdateDTO.getLogradouro() : getLogradouro();
-        bairro = enderecoUpdateDTO.getBairro() != null ? enderecoUpdateDTO.getBairro() : getBairro();
-        numero = enderecoUpdateDTO.getNumero() != null ? enderecoUpdateDTO.getNumero() : getNumero();
-        complemento = enderecoUpdateDTO.getComplemento() != null ? enderecoUpdateDTO.getComplemento() : getComplemento();
-        cep = enderecoUpdateDTO.getCep() != null ? enderecoUpdateDTO.getCep() : getCep();
-        municipio= enderecoUpdateDTO.getMunicipio() != null ? enderecoUpdateDTO.getMunicipio() : getMunicipio();
+    public static Endereco ofUpdate(EnderecoUpdateDTO enderecoUpdateDTO) {
+        Endereco endereco = new Endereco();
+        BeanUtils.copyProperties(enderecoUpdateDTO, endereco);
+        return endereco;
     }
+
+
 
 
 

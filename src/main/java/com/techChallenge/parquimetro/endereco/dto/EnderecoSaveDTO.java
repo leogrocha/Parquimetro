@@ -3,6 +3,7 @@ package com.techChallenge.parquimetro.endereco.dto;
 import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,13 +24,10 @@ public class EnderecoSaveDTO {
     @NotBlank(message = "Município não pode ser nulo ou em branco")
     private String municipio;
 
-    public EnderecoSaveDTO(Endereco endereco) {
-        logradouro=endereco.getLogradouro();
-        bairro=endereco.getBairro();
-        numero=endereco.getNumero();
-        complemento=endereco.getComplemento();
-        cep=endereco.getCep();
-        municipio=endereco.getMunicipio();
+    public static EnderecoSaveDTO of(Endereco endereco) {
+        EnderecoSaveDTO enderecoSaveDTO = new EnderecoSaveDTO();
+        BeanUtils.copyProperties(endereco, enderecoSaveDTO);
+        return enderecoSaveDTO;
     }
 
 
