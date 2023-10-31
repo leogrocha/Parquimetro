@@ -6,6 +6,7 @@ import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.condutor.domain.FormaPagamento;
 import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +28,15 @@ public class CondutorDTO {
     private EnderecoDTO endereco;
     private List<VeiculoMinDTO> veiculos = new ArrayList<>();
 
-
-    public CondutorDTO(Condutor condutor) {
-        condutorId = condutor.getCondutorId();
-        nome = condutor.getNome();
-        cpf = condutor.getCpf();
-        telefone = condutor.getTelefone();
-        email = condutor.getEmail();
-        formaPagamento = condutor.getFormaPagamento();
-        endereco = new EnderecoDTO(condutor.getEndereco());
+    public static CondutorDTO of(Condutor condutor) {
+        var condutorDTO = new CondutorDTO();
+        condutorDTO.setEndereco(EnderecoDTO.of(condutor.getEndereco()));
+        List<VeiculoMinDTO> veiculos = new ArrayList<>();
         for (Veiculo veiculo : condutor.getVeiculos()) {
-            veiculos.add(new VeiculoMinDTO(veiculo));
+            veiculos.add(VeiculoMinDTO.of(veiculo));
         }
+        condutorDTO.setVeiculos(veiculos);
+        BeanUtils.copyProperties(condutor, condutorDTO);
+        return condutorDTO;
     }
 }

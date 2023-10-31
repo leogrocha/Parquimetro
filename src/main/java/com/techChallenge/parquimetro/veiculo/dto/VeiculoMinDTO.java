@@ -2,6 +2,7 @@ package com.techChallenge.parquimetro.veiculo.dto;
 
 import com.techChallenge.parquimetro.veiculo.domain.Veiculo;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 
 @NoArgsConstructor
@@ -17,13 +18,10 @@ public class VeiculoMinDTO {
     private String modelo;
     private Integer anoFabricacao;
     private String placa;
-
-    public VeiculoMinDTO(Veiculo veiculo) {
-        veiculoId = veiculo.getVeiculoId();
-        marca = veiculo.getMarca();
-        modelo = veiculo.getModelo();
-        anoFabricacao = veiculo.getAnoFabricacao();
-        placa = veiculo.getPlaca();
+    public static VeiculoMinDTO of(Veiculo veiculo) {
+        VeiculoMinDTO veiculoMinDTO = new VeiculoMinDTO();
+        BeanUtils.copyProperties(veiculo, veiculoMinDTO);
+        return veiculoMinDTO;
     }
 
 }

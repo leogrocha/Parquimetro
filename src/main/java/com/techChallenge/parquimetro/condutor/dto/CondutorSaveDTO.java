@@ -3,11 +3,13 @@ package com.techChallenge.parquimetro.condutor.dto;
 import com.techChallenge.parquimetro.endereco.dto.EnderecoSaveDTO;
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.condutor.domain.FormaPagamento;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.beans.BeanUtils;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,12 +31,13 @@ public class CondutorSaveDTO {
     @NotNull(message = "Forma de pagamento não pode ser nula.")
     private FormaPagamento formaPagamento;
     @NotNull(message = "Endereço não pode ser nulo")
-    private EnderecoSaveDTO endereco;
+    @Valid private EnderecoSaveDTO endereco;
 
-    public CondutorSaveDTO(Condutor condutor) {
-        this(condutor.getNome(), condutor.getCpf(),
-                condutor.getTelefone(), condutor.getEmail(),
-                condutor.getFormaPagamento(), condutor.getEndereco() != null ? new EnderecoSaveDTO(condutor.getEndereco()) : null);
+    public static CondutorSaveDTO of(Condutor condutor) {
+        CondutorSaveDTO condutorSaveDTO = new CondutorSaveDTO();
+        condutorSaveDTO.setEndereco(condutor.getEndereco() != null ? EnderecoSaveDTO.of(condutor.getEndereco()) : null);
+        BeanUtils.copyProperties(condutor, condutorSaveDTO);
+        return condutorSaveDTO;
     }
 
 

@@ -1,7 +1,8 @@
 package com.techChallenge.parquimetro.veiculo.controller;
 
 
-import com.techChallenge.parquimetro.endereco.dto.VeiculoDTO;
+import com.techChallenge.parquimetro.veiculo.dto.VeiculoDTO;
+import com.techChallenge.parquimetro.veiculo.dto.VeiculoFiltroDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoSaveDTO;
 import com.techChallenge.parquimetro.veiculo.dto.VeiculoUpdateDTO;
 import com.techChallenge.parquimetro.veiculo.service.VeiculoService;
@@ -19,11 +20,11 @@ import java.util.List;
 @AllArgsConstructor
 public class VeiculoController {
 
-    private VeiculoService service;
+    private final VeiculoService service;
 
     @GetMapping
-    public ResponseEntity<List<VeiculoDTO>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<VeiculoDTO>> findAll(VeiculoFiltroDTO veiculoFiltroDTO) {
+        return ResponseEntity.ok(service.findAll(veiculoFiltroDTO));
     }
 
     @GetMapping("/{veiculoId}")

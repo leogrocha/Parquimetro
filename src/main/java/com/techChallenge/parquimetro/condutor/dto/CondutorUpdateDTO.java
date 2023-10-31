@@ -4,10 +4,12 @@ import com.techChallenge.parquimetro.endereco.dto.EnderecoUpdateDTO;
 import com.techChallenge.parquimetro.condutor.domain.Condutor;
 import com.techChallenge.parquimetro.endereco.domain.Endereco;
 import com.techChallenge.parquimetro.condutor.domain.FormaPagamento;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,15 +30,13 @@ public class CondutorUpdateDTO {
     private String email;
     private FormaPagamento formaPagamento;
     @NotNull(message = "Endereço não pode ser nulo")
-    private EnderecoUpdateDTO endereco;
+    @Valid private EnderecoUpdateDTO endereco;
 
-    public CondutorUpdateDTO(Condutor condutor) {
-                this(condutor.getCondutorId(),
-                condutor.getNome(),
-                condutor.getTelefone(),
-                condutor.getEmail(),
-                condutor.getFormaPagamento(),
-                condutor.getEndereco() != null ? new EnderecoUpdateDTO(condutor.getEndereco()) : null);
+    public static CondutorUpdateDTO of(Condutor condutor) {
+        CondutorUpdateDTO condutorUpdateDTO = new CondutorUpdateDTO();
+        condutorUpdateDTO.setEndereco(EnderecoUpdateDTO.of(condutor.getEndereco()));
+        BeanUtils.copyProperties(condutor, condutorUpdateDTO);
+        return condutorUpdateDTO;
     }
 
     public static void mapperEntity(CondutorUpdateDTO condutorUpdateDTO, Condutor condutor, Endereco endereco) {
